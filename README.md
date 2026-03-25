@@ -1,5 +1,7 @@
 # Strava Dashboard
 
+**[Live Demo →](https://strava-dashboard-arungupta.vercel.app)**
+
 A web application that visualizes Strava activity data for runners. Authenticate with your Strava account and get insights into your running performance.
 
 Built following [SpecKit](https://github.com/github/spec-kit) Specification-Driven Development (SDD) — every feature starts with a spec, is planned before implementation, and developed test-first.
