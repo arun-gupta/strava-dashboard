@@ -122,7 +122,10 @@ Then go to **Deployments**, find the latest deployment, click **⋯ → Redeploy
 ### 3. Update Strava API callback URL
 
 1. Go to [strava.com/settings/api](https://www.strava.com/settings/api)
-2. Set **Authorization Callback Domain** to your Vercel domain (e.g. `strava-dashboard.vercel.app`) — no `https://`, just the domain
+2. Set **Authorization Callback Domain** to a comma-separated list of both domains so local dev continues to work:
+   ```
+   localhost,strava-dashboard.vercel.app
+   ```
 
 ### 4. Verify
 
