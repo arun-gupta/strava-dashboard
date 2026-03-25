@@ -21,7 +21,9 @@ export default async function LandingPage({
           Visualize your running data. Connect your Strava account to get started.
         </p>
         {error && <ErrorMessage error={error} />}
-        <LoginButton />
+        <div className="flex justify-center">
+          <LoginButton />
+        </div>
       </div>
     </main>
   );
