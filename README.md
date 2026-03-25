@@ -97,6 +97,41 @@ strava-dashboard/
 └── proxy.ts              # Route protection (Next.js 16 Proxy)
 ```
 
+## Deploying to Vercel
+
+### 1. Connect the repo
+
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click **Add New → Project** and import `arun-gupta/strava-dashboard`
+3. Leave all build settings as default — Vercel detects Next.js automatically
+4. Click **Deploy** (it will fail — env vars aren't set yet, that's expected)
+
+### 2. Add environment variables
+
+In your Vercel project go to **Settings → Environment Variables** and add:
+
+| Variable | Value |
+|---|---|
+| `STRAVA_CLIENT_ID` | Your Strava API client ID |
+| `STRAVA_CLIENT_SECRET` | Your Strava API client secret |
+| `NEXTAUTH_SECRET` | A random secret (run `openssl rand -base64 32` to generate one) |
+| `NEXTAUTH_URL` | Your Vercel deployment URL (e.g. `https://strava-dashboard.vercel.app`) |
+
+Then go to **Deployments**, find the latest deployment, click **⋯ → Redeploy**.
+
+### 3. Update Strava API callback URL
+
+1. Go to [strava.com/settings/api](https://www.strava.com/settings/api)
+2. Set **Authorization Callback Domain** to your Vercel domain (e.g. `strava-dashboard.vercel.app`) — no `https://`, just the domain
+
+### 4. Verify
+
+Visit your Vercel URL, click **Connect with Strava**, and confirm the full login flow works.
+
+### Subsequent deploys
+
+Every push to `main` automatically triggers a new Vercel deployment — no manual steps needed.
+
 ## License
 
 MIT
