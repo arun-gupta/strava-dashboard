@@ -2,7 +2,7 @@
 
 A modern web application that visualizes Strava activity data for runners. Authenticate with your Strava account and get insights into your running performance.
 
-This project is built following [SpecKit](https://speckit.dev) Specification-Driven Development (SDD), where every feature starts with a spec, is planned before implementation, and is developed test-first.
+This project is built following [SpecKit](https://github.com/github/spec-kit) Specification-Driven Development (SDD), where every feature starts with a spec, is planned before implementation, and is developed test-first.
 
 ## Features
 
