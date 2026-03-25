@@ -59,6 +59,7 @@ export const config: NextAuthConfig = {
         params: { scope: "read", response_type: "code", approval_prompt: "auto" },
       },
       token: {
+        url: "https://www.strava.com/oauth/token",
         async request({ params }) {
           // Strava's token endpoint returns non-standard fields (e.g. `athlete`)
           // that Auth.js strict validation rejects. Handle exchange manually.
