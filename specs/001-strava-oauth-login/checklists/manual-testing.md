@@ -56,9 +56,9 @@
 
 ## Edge Cases
 
-- [ ] Visiting `http://localhost:3000/dashboard` without being logged in redirects to `/`
-- [ ] Visiting `http://localhost:3000/?error=OAuthError` shows a generic error message
-- [ ] App handles Strava being slow or unavailable gracefully (no unhandled crash)
+- [x] Visiting `http://localhost:3000/dashboard` without being logged in redirects to `/`
+- [x] Visiting `http://localhost:3000/?error=OAuthError` shows a generic error message
+- [x] App handles Strava being slow or unavailable gracefully (no unhandled crash)
 
 ---
 
