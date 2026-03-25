@@ -12,7 +12,7 @@ This project is built following [SpecKit](https://github.com/github/spec-kit) Sp
 
 ## Tech Stack
 
-- **Framework**: Next.js 15 (App Router, Server Components)
+- **Framework**: Next.js 16 (App Router, Server Components)
 - **Language**: TypeScript
 - **Auth**: NextAuth.js with Strava OAuth
 - **Styling**: Tailwind CSS
@@ -76,11 +76,21 @@ npm run test:e2e
 
 ```
 strava-dashboard/
-├── app/                  # Next.js App Router pages and layouts
-├── components/           # React components
-├── lib/                  # Utility functions and API clients
-├── tests/                # Unit and integration tests
-└── e2e/                  # Playwright e2e tests
+├── app/
+│   ├── api/auth/         # NextAuth.js route handler
+│   ├── dashboard/        # Protected dashboard page
+│   ├── layout.tsx        # Root layout with SessionProvider
+│   └── page.tsx          # Landing page
+├── components/
+│   ├── auth/             # LoginButton, LogoutButton
+│   └── ui/               # ErrorMessage, AuthErrorBoundary
+├── lib/
+│   └── auth.ts           # NextAuth.js config, Strava provider, token refresh
+├── specs/                # SpecKit SDD specs, plans, and tasks
+├── tests/
+│   ├── unit/             # Vitest unit tests
+│   └── e2e/              # Playwright e2e tests
+└── proxy.ts              # Route protection (Next.js 16 Proxy)
 ```
 
 ## Contributing
