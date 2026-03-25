@@ -97,14 +97,6 @@ strava-dashboard/
 └── proxy.ts              # Route protection (Next.js 16 Proxy)
 ```
 
-## Contributing
-
-1. Create a feature branch off `main`
-2. Write tests first (TDD)
-3. Implement the feature
-4. Ensure all tests pass
-5. Open a pull request
-
 ## License
 
 MIT
