@@ -47,10 +47,10 @@
 
 ## US4 — Logout
 
-- [ ] While logged in, clicking "Logout" on the dashboard clears the session
-- [ ] Browser redirects to the landing page after logout
-- [ ] Navigating to `http://localhost:3000/dashboard` after logout redirects to `/`
-- [ ] No stale session data remains (opening a new tab shows landing page)
+- [x] While logged in, clicking "Logout" on the dashboard clears the session
+- [x] Browser redirects to the landing page after logout
+- [x] Navigating to `http://localhost:3000/dashboard` after logout redirects to `/`
+- [x] No stale session data remains (opening a new tab shows landing page)
 
 ---
 
