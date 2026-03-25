@@ -63,7 +63,7 @@ Built following [SpecKit](https://github.com/github/spec-kit) Specification-Driv
 ## Docs
 
 - [Development Guide](docs/development.md) — running tests, project structure, SpecKit workflow
-- [Deployment Guide](docs/deployment.md) — deploying to Vercel
+- [Deployment Guide](docs/deployment.md) — deploying to Vercel (includes Strava callback domain switching)
 
 ## License
 
