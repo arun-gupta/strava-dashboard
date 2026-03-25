@@ -25,10 +25,10 @@
 
 ## US2 — View Athlete Stats Summary
 
-- [ ] Dashboard displays all-time total run count
-- [ ] Dashboard displays all-time total distance in kilometres
-- [ ] Dashboard displays all-time total elapsed time in human-readable format (e.g. "12h 34m")
-- [ ] Values match those visible on the athlete's Strava profile page
+- [x] Dashboard displays all-time total run count
+- [x] Dashboard displays all-time total distance in kilometres
+- [x] Dashboard displays all-time total elapsed time in human-readable format (e.g. "12h 34m")
+- [x] Values match those visible on the athlete's Strava profile page
 
 ---
 
@@ -43,9 +43,11 @@
 
 ## Edge Cases
 
-- [ ] Athlete with no profile photo set shows a fallback avatar (not a broken image)
-- [ ] Athlete with no location set on Strava — location field is hidden or shows gracefully
-- [ ] Athlete with no running data — stats show zeros gracefully (e.g. "0 runs", "0 km", "0h 0m"), not blank or broken
+> **Note**: No photo, no location, and zero stats are covered by unit tests (`AthleteProfileCard.test.tsx`, `AthleteStatsCard.test.tsx`) and do not require manual verification with a real account.
+
+- [x] No profile photo fallback — covered by unit test (renders initials)
+- [x] No location — covered by unit test (field hidden when null)
+- [x] No running data — covered by unit test (zeros displayed gracefully)
 - [ ] Refreshing the dashboard reloads profile data correctly
 
 ---
