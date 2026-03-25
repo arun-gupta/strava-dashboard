@@ -9,7 +9,8 @@ export default async function LandingPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const session = await auth();
-  if (session) redirect("/dashboard");
+  const sessionError = (session as Record<string, unknown> & typeof session)?.error as string | undefined;
+  if (session && !sessionError) redirect("/dashboard");
 
   const { error } = await searchParams;
 
