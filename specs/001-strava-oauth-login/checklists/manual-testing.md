@@ -28,10 +28,10 @@
 
 ## US2 — Returning User Auto-Login
 
-- [ ] After logging in, close the browser tab and reopen `http://localhost:3000`
-- [ ] App redirects directly to `/dashboard` without showing the landing page
-- [ ] Athlete name is still shown correctly (session persisted)
-- [ ] Visiting `http://localhost:3000` while logged in redirects to `/dashboard`
+- [x] After logging in, close the browser tab and reopen `http://localhost:3000`
+- [x] App redirects directly to `/dashboard` without showing the landing page
+- [x] Athlete name is still shown correctly (session persisted)
+- [x] Visiting `http://localhost:3000` while logged in redirects to `/dashboard`
 
 ---
 
