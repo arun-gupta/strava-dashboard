@@ -45,6 +45,7 @@
 
 - [ ] Athlete with no profile photo set shows a fallback avatar (not a broken image)
 - [ ] Athlete with no location set on Strava — location field is hidden or shows gracefully
+- [ ] Athlete with no running data — stats show zeros gracefully (e.g. "0 runs", "0 km", "0h 0m"), not blank or broken
 - [ ] Refreshing the dashboard reloads profile data correctly
 
 ---

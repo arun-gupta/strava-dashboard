@@ -61,6 +61,7 @@ While the athlete profile is loading, the dashboard shows a loading indicator. I
 - What if the athlete's location (city/country) is not set on Strava?
 - What if the Strava API returns partial data (e.g. stats missing)?
 - What if the access token expires mid-load?
+- What if the athlete has no running data (zero runs, zero distance, zero time)?
 
 ## Requirements *(mandatory)*
 
@@ -74,6 +75,7 @@ While the athlete profile is loading, the dashboard shows a loading indicator. I
 - **FR-006**: System MUST show a loading state while profile data is being fetched
 - **FR-007**: System MUST show a user-friendly error state if the Strava API request fails
 - **FR-008**: System MUST fetch athlete profile data server-side using the authenticated session's access token
+- **FR-009**: System MUST display zero values gracefully (e.g. "0 runs", "0 km", "0h 0m") when the athlete has no running data
 
 ### Key Entities
 
