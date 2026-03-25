@@ -1,4 +1,5 @@
-import { fetchAthleteProfile } from "@/lib/strava";
+import { redirect } from "next/navigation";
+import { fetchAthleteProfile, StravaAuthError } from "@/lib/strava";
 import Image from "next/image";
 
 interface Props {
@@ -6,7 +7,13 @@ interface Props {
 }
 
 export default async function AthleteProfileCard({ accessToken }: Props) {
-  const profile = await fetchAthleteProfile(accessToken);
+  let profile;
+  try {
+    profile = await fetchAthleteProfile(accessToken);
+  } catch (err) {
+    if (err instanceof StravaAuthError) redirect("/api/auth/signout");
+    throw err;
+  }
 
   const name = `${profile.firstname} ${profile.lastname}`;
 
