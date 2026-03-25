@@ -8,18 +8,18 @@
 
 ## Setup
 
-- [ ] `npm run dev` starts without errors
-- [ ] Logged in with a real Strava account
+- [x] `npm run dev` starts without errors
+- [x] Logged in with a real Strava account
 
 ---
 
 ## US1 — View Profile on Dashboard
 
-- [ ] Dashboard displays the athlete's Strava profile photo
-- [ ] Dashboard displays the athlete's full name
-- [ ] Dashboard displays the athlete's city and country (if set on Strava)
-- [ ] Profile photo matches what is shown on the athlete's Strava profile page
-- [ ] No errors in browser console or server logs
+- [x] Dashboard displays the athlete's Strava profile photo
+- [x] Dashboard displays the athlete's full name
+- [x] Dashboard displays the athlete's city and country (if set on Strava)
+- [x] Profile photo matches what is shown on the athlete's Strava profile page
+- [x] No errors in browser console or server logs
 
 ---
 

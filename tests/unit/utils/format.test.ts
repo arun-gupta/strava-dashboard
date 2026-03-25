@@ -10,8 +10,8 @@ describe("formatDistance", () => {
     expect(formatDistance(0)).toBe("0.0 km");
   });
 
-  it("rounds to 1 decimal place", () => {
-    expect(formatDistance(1234567.8)).toBe("1234.6 km");
+  it("adds thousands separator for large distances", () => {
+    expect(formatDistance(1234567.8)).toBe("1,234.6 km");
   });
 
   it("handles sub-km distances", () => {
@@ -34,5 +34,9 @@ describe("formatElapsedTime", () => {
 
   it("handles minutes only (< 1 hour)", () => {
     expect(formatElapsedTime(1800)).toBe("0h 30m");
+  });
+
+  it("adds thousands separator for large hour counts", () => {
+    expect(formatElapsedTime(13648140)).toBe("3,791h 9m");
   });
 });

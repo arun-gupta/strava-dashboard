@@ -14,16 +14,16 @@ export default async function AthleteStatsCard({ accessToken, athleteId }: Props
   return (
     <div className="grid grid-cols-3 gap-4 p-6 bg-white rounded-xl border border-gray-200">
       <div className="text-center">
-        <p className="text-2xl font-bold text-gray-900">{totals.count}</p>
-        <p className="text-sm text-gray-500 mt-1">Runs</p>
+        <p className="text-sm font-medium text-gray-500 mb-1">Runs</p>
+        <p className="text-2xl font-bold text-gray-900">{totals.count.toLocaleString("en-US")}</p>
       </div>
       <div className="text-center">
+        <p className="text-sm font-medium text-gray-500 mb-1">Total Distance</p>
         <p className="text-2xl font-bold text-gray-900">{formatDistance(totals.distance)}</p>
-        <p className="text-sm text-gray-500 mt-1">Total Distance</p>
       </div>
       <div className="text-center">
+        <p className="text-sm font-medium text-gray-500 mb-1">Total Time</p>
         <p className="text-2xl font-bold text-gray-900">{formatElapsedTime(totals.elapsed_time)}</p>
-        <p className="text-sm text-gray-500 mt-1">Total Time</p>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ describe("AthleteStatsCard", () => {
     render(ui);
 
     expect(screen.getByText("312")).toBeInTheDocument();
-    expect(screen.getByText("2345.7 km")).toBeInTheDocument();
+    expect(screen.getByText("2,345.7 km")).toBeInTheDocument();
     expect(screen.getByText("240h 0m")).toBeInTheDocument();
   });
 
