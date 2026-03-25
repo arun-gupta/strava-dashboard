@@ -1,12 +1,6 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
-
-interface StravaProfile {
-  id: number;
-  firstname: string;
-  lastname: string;
-  profile: string;
-}
+import Strava from "next-auth/providers/strava";
 
 interface Token {
   athleteId?: string;
@@ -48,44 +42,10 @@ async function refreshAccessToken(token: Token): Promise<Token> {
 
 export const config: NextAuthConfig = {
   providers: [
-    {
-      id: "strava",
-      name: "Strava",
-      type: "oauth",
+    Strava({
       clientId: process.env.STRAVA_CLIENT_ID,
       clientSecret: process.env.STRAVA_CLIENT_SECRET,
-      authorization: {
-        url: "https://www.strava.com/oauth/authorize",
-        params: { scope: "read", response_type: "code", approval_prompt: "auto" },
-      },
-      token: {
-        url: "https://www.strava.com/oauth/token",
-        async request({ params }) {
-          // Strava's token endpoint returns non-standard fields (e.g. `athlete`)
-          // that Auth.js strict validation rejects. Handle exchange manually.
-          const response = await fetch("https://www.strava.com/oauth/token", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-              client_id: process.env.STRAVA_CLIENT_ID!,
-              client_secret: process.env.STRAVA_CLIENT_SECRET!,
-              code: params.code!,
-              grant_type: "authorization_code",
-            }),
-          });
-          const tokens = await response.json();
-          return { tokens };
-        },
-      },
-      userinfo: "https://www.strava.com/api/v3/athlete",
-      profile(profile: StravaProfile) {
-        return {
-          id: String(profile.id),
-          name: `${profile.firstname} ${profile.lastname}`,
-          image: profile.profile,
-        };
-      },
-    },
+    }),
   ],
   callbacks: {
     async jwt({ token, account, profile }) {
