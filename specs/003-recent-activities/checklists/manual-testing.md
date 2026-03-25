@@ -9,14 +9,15 @@
 ## Setup
 
 - [ ] `npm run dev` starts without errors
-- [ ] Logged in with a real Strava account
+- [ ] Logged in with a real Strava account that has at least one recorded activity
 
 ---
 
 ## US1 — View Recent Activities on Dashboard
 
-- [ ] Dashboard displays a list of recent activities
-- [ ] Each activity shows its type (e.g. "Run", "Ride", "Swim")
+- [ ] Dashboard displays a list of recent activities below the stats card
+- [ ] Each activity shows an icon representing its type
+- [ ] Each activity shows its type as a text label (e.g. "Run", "Ride", "Swim")
 - [ ] Each activity shows its date in a human-readable format (e.g. "25 Mar 2026")
 - [ ] Each activity shows its distance in kilometres
 - [ ] Each activity shows its elapsed time (e.g. "1h 04m")
@@ -48,6 +49,7 @@
 - [x] Activity with zero distance — covered by unit test ("—" shown for distance and pace)
 - [ ] Multiple activity types visible in the list (e.g. at least one Run and one non-Run activity)
 - [ ] Refreshing the dashboard reloads the activity list correctly
+- [ ] Rate limit error (429) shows a friendly message with usage counts and reset timer
 
 ---
 

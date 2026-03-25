@@ -45,6 +45,11 @@ export const config: NextAuthConfig = {
     Strava({
       clientId: process.env.STRAVA_CLIENT_ID,
       clientSecret: process.env.STRAVA_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: "read,activity:read",
+        },
+      },
     }),
   ],
   callbacks: {
