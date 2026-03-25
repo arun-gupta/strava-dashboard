@@ -37,11 +37,11 @@
 
 ## US3 — Login Denial
 
-- [ ] Click "Connect with Strava" on the landing page
-- [ ] On Strava's authorization page, click "Cancel" or deny access
-- [ ] App returns to the landing page (not a blank page or error)
-- [ ] A friendly error message is displayed explaining authorization is required
-- [ ] Clicking "Connect with Strava" again restarts the flow cleanly
+- [x] Click "Connect with Strava" on the landing page
+- [x] On Strava's authorization page, click "Cancel" or deny access — **Note: Strava does not show a Cancel button; denial simulated via `/?error=access_denied`**
+- [x] App returns to the landing page (not a blank page or error)
+- [x] A friendly error message is displayed explaining authorization is required
+- [x] Clicking "Connect with Strava" again restarts the flow cleanly
 
 ---
 
