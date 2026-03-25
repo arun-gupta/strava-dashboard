@@ -1,11 +1,10 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
+import type { JWT } from "@auth/core/jwt";
 import Strava from "next-auth/providers/strava";
 
-interface Token {
+interface Token extends JWT {
   athleteId?: string;
-  name?: string;
-  image?: string;
   accessToken?: string;
   refreshToken?: string;
   accessTokenExpires?: number;

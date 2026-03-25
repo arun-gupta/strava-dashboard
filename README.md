@@ -6,9 +6,9 @@ This project is built following [SpecKit](https://github.com/github/spec-kit) Sp
 
 ## Features
 
-- OAuth authentication with Strava
-- Running activity visualizations and stats
-- Personal performance trends and insights
+- **OAuth authentication with Strava** — secure sign-in with automatic token refresh
+- **Athlete profile** — displays your Strava profile photo, name, and location on the dashboard
+- **All-time running stats** — total run count, total distance (km), and total elapsed time at a glance
 
 ## Tech Stack
 
@@ -82,24 +82,20 @@ strava-dashboard/
 │   ├── layout.tsx        # Root layout with SessionProvider
 │   └── page.tsx          # Landing page
 ├── components/
+│   ├── athlete/          # AthleteProfileCard, AthleteStatsCard, AthleteProfileSkeleton
 │   ├── auth/             # LoginButton, LogoutButton
 │   └── ui/               # ErrorMessage, AuthErrorBoundary
 ├── lib/
-│   └── auth.ts           # NextAuth.js config, Strava provider, token refresh
+│   ├── auth.ts           # NextAuth.js config, Strava provider, token refresh
+│   ├── strava.ts         # Strava API client (fetchAthleteProfile, fetchAthleteStats)
+│   └── utils/
+│       └── format.ts     # formatDistance, formatElapsedTime
 ├── specs/                # SpecKit SDD specs, plans, and tasks
 ├── tests/
 │   ├── unit/             # Vitest unit tests
 │   └── e2e/              # Playwright e2e tests
 └── proxy.ts              # Route protection (Next.js 16 Proxy)
 ```
-
-## Contributing
-
-1. Create a feature branch off `main`
-2. Write tests first (TDD)
-3. Implement the feature
-4. Ensure all tests pass
-5. Open a pull request
 
 ## License
 

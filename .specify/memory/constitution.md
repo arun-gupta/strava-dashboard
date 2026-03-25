@@ -36,9 +36,11 @@ Start simple, YAGNI principles. One Next.js repo (no monorepo). Use Next.js API 
 - All tests must pass before merge
 - Strava API credentials stored in `.env.local`, never committed
 - `.env.example` committed with placeholder values
+- `README.md` features list MUST be updated in every spec's Polish phase to reflect the newly completed feature — no spec is considered done until README is current
+- A `checklists/manual-testing.md` MUST be created for every spec, covering all user stories and edge cases. All items must be signed off by a human before the PR is opened
 
 ## Governance
 
 This constitution supersedes all other practices. All implementation decisions must align with these principles. Complexity must be justified. Amendments require updating this file with a new version and date.
 
-**Version**: 1.0.0 | **Ratified**: 2026-03-24 | **Last Amended**: 2026-03-24
+**Version**: 1.2.0 | **Ratified**: 2026-03-24 | **Last Amended**: 2026-03-25

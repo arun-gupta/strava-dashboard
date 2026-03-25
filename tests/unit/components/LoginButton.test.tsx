@@ -20,4 +20,12 @@ describe("LoginButton", () => {
     await userEvent.click(screen.getByRole("button", { name: /connect with strava/i }));
     expect(signIn).toHaveBeenCalledWith("strava");
   });
+
+  it("shows a spinner and hides text when loading", async () => {
+    vi.mocked(signIn).mockImplementation(() => new Promise(() => {})); // never resolves
+    render(<LoginButton />);
+    await userEvent.click(screen.getByRole("button", { name: /connect with strava/i }));
+    expect(screen.getByRole("status")).toBeInTheDocument(); // spinner
+    expect(screen.queryByText(/connect with strava/i)).not.toBeInTheDocument();
+  });
 });
