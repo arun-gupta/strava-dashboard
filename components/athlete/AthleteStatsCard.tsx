@@ -1,4 +1,5 @@
-import { fetchAthleteStats } from "@/lib/strava";
+import { redirect } from "next/navigation";
+import { fetchAthleteStats, StravaAuthError } from "@/lib/strava";
 import { formatDistance, formatElapsedTime } from "@/lib/utils/format";
 
 interface Props {
@@ -7,7 +8,13 @@ interface Props {
 }
 
 export default async function AthleteStatsCard({ accessToken, athleteId }: Props) {
-  const stats = await fetchAthleteStats(accessToken, athleteId);
+  let stats;
+  try {
+    stats = await fetchAthleteStats(accessToken, athleteId);
+  } catch (err) {
+    if (err instanceof StravaAuthError) redirect("/api/auth/signout");
+    throw err;
+  }
 
   const totals = stats.all_run_totals ?? { count: 0, distance: 0, elapsed_time: 0 };
 

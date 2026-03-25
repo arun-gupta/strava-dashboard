@@ -1,4 +1,5 @@
-import { fetchRecentActivities } from "@/lib/strava";
+import { redirect } from "next/navigation";
+import { fetchRecentActivities, StravaAuthError } from "@/lib/strava";
 import ActivityRow from "./ActivityRow";
 
 interface Props {
@@ -6,7 +7,13 @@ interface Props {
 }
 
 export default async function RecentActivitiesList({ accessToken }: Props) {
-  const activities = await fetchRecentActivities(accessToken);
+  let activities;
+  try {
+    activities = await fetchRecentActivities(accessToken);
+  } catch (err) {
+    if (err instanceof StravaAuthError) redirect("/api/auth/signout");
+    throw err;
+  }
 
   if (activities.length === 0) {
     return (
