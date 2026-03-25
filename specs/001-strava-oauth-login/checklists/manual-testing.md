@@ -8,21 +8,21 @@
 
 ## Setup
 
-- [ ] `npm run dev` starts without errors
-- [ ] `.env.local` has valid Strava credentials
-- [ ] Browser DevTools open to monitor network requests and console errors
+- [x] `npm run dev` starts without errors
+- [x] `.env.local` has valid Strava credentials
+- [x] Browser DevTools open to monitor network requests and console errors
 
 ---
 
 ## US1 — First-Time Login
 
-- [ ] Visiting `http://localhost:3000` shows the landing page with "Connect with Strava" button
-- [ ] Clicking "Connect with Strava" shows a loading state ("Connecting…") and disables the button
-- [ ] Browser redirects to Strava's authorization page (`strava.com`)
-- [ ] Strava shows the correct app name and requested permissions
-- [ ] After granting access, browser redirects back to `http://localhost:3000/dashboard`
-- [ ] Dashboard displays the athlete's real name from Strava
-- [ ] No errors in browser console or server logs
+- [x] Visiting `http://localhost:3000` shows the landing page with "Connect with Strava" button
+- [x] Clicking "Connect with Strava" shows a loading state ("Connecting…") and disables the button
+- [x] Browser redirects to Strava's authorization page (`strava.com`)
+- [x] Strava shows the correct app name and requested permissions
+- [x] After granting access, browser redirects back to `http://localhost:3000/dashboard`
+- [x] Dashboard displays the athlete's real name from Strava
+- [x] No errors in browser console or server logs
 
 ---
 
