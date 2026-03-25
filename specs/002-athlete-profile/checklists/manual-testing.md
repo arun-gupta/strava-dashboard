@@ -34,10 +34,10 @@
 
 ## US3 — Loading and Error States
 
-- [ ] A loading skeleton or spinner is shown while profile data is being fetched
-- [ ] No blank content flash before data loads
-- [ ] Visiting the dashboard with network throttled (DevTools → Slow 3G) shows loading state
-- [ ] Error state displays a friendly message (simulate by temporarily breaking the API call)
+- [x] A loading skeleton or spinner is shown while profile data is being fetched
+- [x] No blank content flash before data loads
+- [x] Visiting the dashboard with network throttled (DevTools → Slow 3G) shows loading state
+- [x] Error state displays a friendly message (simulate by temporarily breaking the API call)
 
 ---
 
@@ -48,7 +48,7 @@
 - [x] No profile photo fallback — covered by unit test (renders initials)
 - [x] No location — covered by unit test (field hidden when null)
 - [x] No running data — covered by unit test (zeros displayed gracefully)
-- [ ] Refreshing the dashboard reloads profile data correctly
+- [x] Refreshing the dashboard reloads profile data correctly
 
 ---
 
