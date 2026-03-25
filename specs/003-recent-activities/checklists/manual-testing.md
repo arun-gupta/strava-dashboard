@@ -13,20 +13,21 @@
 
 ---
 
-## US1 — View Recent Runs on Dashboard
+## US1 — View Recent Activities on Dashboard
 
-- [ ] Dashboard displays a list of recent runs
-- [ ] Each run shows the date in a human-readable format (e.g. "25 Mar 2026")
-- [ ] Each run shows the distance in kilometres
-- [ ] Each run shows the elapsed time (e.g. "1h 04m")
+- [ ] Dashboard displays a list of recent activities
+- [ ] Each activity shows its type (e.g. "Run", "Ride", "Swim")
+- [ ] Each activity shows its date in a human-readable format (e.g. "25 Mar 2026")
+- [ ] Each activity shows its distance in kilometres
+- [ ] Each activity shows its elapsed time (e.g. "1h 04m")
 - [ ] Values match those visible on the athlete's Strava activity feed
 
 ---
 
-## US2 — View Run Name and Pace
+## US2 — View Activity Name and Pace
 
-- [ ] Each run shows its name (e.g. "Morning Run")
-- [ ] Each run shows average pace in min/km format (e.g. "5:32 /km")
+- [ ] Each activity shows its name (e.g. "Morning Run", "Evening Ride")
+- [ ] Each activity shows its average pace in min/km format (e.g. "5:32 /km")
 
 ---
 
@@ -40,10 +41,12 @@
 
 ## Edge Cases
 
-> **Note**: No runs and no-name edge cases are covered by unit tests and do not require manual verification.
+> **Note**: No activities and no-name edge cases are covered by unit tests and do not require manual verification.
 
-- [x] No runs — covered by unit test (empty state displayed)
-- [x] Run with no name — covered by unit test (fallback "Run" shown)
+- [x] No activities — covered by unit test (empty state displayed)
+- [x] Activity with no name — covered by unit test (fallback shown based on type)
+- [x] Activity with zero distance — covered by unit test ("—" shown for distance and pace)
+- [ ] Multiple activity types visible in the list (e.g. at least one Run and one non-Run activity)
 - [ ] Refreshing the dashboard reloads the activity list correctly
 
 ---
