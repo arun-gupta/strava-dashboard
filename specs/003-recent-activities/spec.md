@@ -18,7 +18,8 @@ An authenticated athlete lands on the dashboard and sees a list of their most re
 **Acceptance Scenarios**:
 
 1. **Given** an authenticated athlete on the dashboard, **When** the page loads, **Then** a list of their most recent activities is displayed
-2. **Given** an activity in the list, **When** the athlete views it, **Then** the activity type is shown (e.g. "Run", "Ride", "Swim")
+2. **Given** an activity in the list, **When** the athlete views it, **Then** an icon representing the activity type is shown alongside the activity name
+3. **Given** an activity in the list, **When** the athlete views it, **Then** the activity type is shown as a label (e.g. "Run", "Ride", "Swim")
 3. **Given** an activity in the list, **When** the athlete views it, **Then** the activity date is shown in a human-readable format (e.g. "25 Mar 2026")
 4. **Given** an activity in the list, **When** the athlete views it, **Then** the activity distance is shown in kilometres
 5. **Given** an activity in the list, **When** the athlete views it, **Then** the activity elapsed time is shown in human-readable format (e.g. "1h 04m")
@@ -62,14 +63,15 @@ While the activity list is loading, a skeleton is shown. If the athlete has no r
 - What if an activity has zero distance (e.g. a strength training session)?
 - What if the Strava API returns fewer activities than the requested count?
 - What if the activities list fails to load (API error)?
-- What if an activity type is unknown or not recognised?
+- What if an activity type is unknown or not recognised — what icon and label should be shown?
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
 - **FR-001**: System MUST display a list of the athlete's most recent activities on the dashboard
-- **FR-002**: System MUST display each activity's type (e.g. Run, Ride, Swim, Hike)
+- **FR-002**: System MUST display an icon representing each activity's type (e.g. a shoe for Run, a bicycle for Ride, goggles for Swim)
+- **FR-013**: System MUST display each activity's type as a text label (e.g. "Run", "Ride", "Swim", "Hike")
 - **FR-003**: System MUST display each activity's date in a human-readable format
 - **FR-004**: System MUST display each activity's distance in kilometres
 - **FR-005**: System MUST display each activity's elapsed time in human-readable format (e.g. "1h 04m")
