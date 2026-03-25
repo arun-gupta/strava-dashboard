@@ -40,6 +40,7 @@ async function refreshAccessToken(token: Token): Promise<Token> {
 }
 
 export const config: NextAuthConfig = {
+  trustHost: true,
   providers: [
     Strava({
       clientId: process.env.STRAVA_CLIENT_ID,
