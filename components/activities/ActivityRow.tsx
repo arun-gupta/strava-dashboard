@@ -15,7 +15,12 @@ export default function ActivityRow({ activity }: ActivityRowProps) {
   const pace = formatPace(activity.elapsed_time, activity.distance);
 
   return (
-    <div className="flex items-center gap-4 p-4 rounded-lg bg-white">
+    <a
+      href={`https://www.strava.com/activities/${activity.id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-4 p-4 rounded-lg bg-white hover:bg-gray-50 transition-colors"
+    >
       <div className="text-orange-500 text-xl flex-shrink-0">
         <Icon />
       </div>
@@ -34,6 +39,6 @@ export default function ActivityRow({ activity }: ActivityRowProps) {
         <p className="text-xs text-gray-500">{formatElapsedTime(activity.elapsed_time)}</p>
         <p className="text-xs text-gray-400">{pace ?? "—"}</p>
       </div>
-    </div>
+    </a>
   );
 }
