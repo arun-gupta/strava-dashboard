@@ -12,7 +12,7 @@ A single bar on the composed chart.
 | Field      | Type     | Description                                              |
 |------------|----------|----------------------------------------------------------|
 | `label`    | `string` | Display label for the x-axis (e.g. "Mar 20" or "Mar 2026") |
-| `distance` | `number` | Total distance in km for this period (0 for empty periods) |
+| `duration` | `number` | Total elapsed time in minutes for this period (0 for empty periods) |
 
 ### TrendFilter
 

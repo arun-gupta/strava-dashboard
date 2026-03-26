@@ -2,7 +2,7 @@ import type { Activity } from "@/lib/strava";
 
 export interface TrendPeriod {
   label: string;
-  distance: number;
+  duration: number; // total elapsed time in minutes
 }
 
 export interface HeatmapDay {
@@ -62,20 +62,20 @@ export function groupByWeek(activities: Activity[], activityType?: string): Tren
     cursor.setUTCDate(cursor.getUTCDate() + 7);
   }
 
-  // Accumulate distances
+  // Accumulate elapsed time (minutes)
   for (const activity of filtered) {
     const actDate = new Date(toDateStr(activity.start_date_local));
     const monday = getMondayOf(actDate);
     const key = monday.toISOString();
-    weekMap.set(key, (weekMap.get(key) ?? 0) + activity.distance / 1000);
+    weekMap.set(key, (weekMap.get(key) ?? 0) + activity.elapsed_time / 60);
   }
 
   // Convert to sorted TrendPeriod[]
   return Array.from(weekMap.entries())
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([isoKey, distance]) => ({
+    .map(([isoKey, duration]) => ({
       label: formatWeekLabel(new Date(isoKey)),
-      distance,
+      duration,
     }));
 }
 
@@ -107,14 +107,14 @@ export function groupByMonth(activities: Activity[], activityType?: string): Tre
 
   for (const activity of filtered) {
     const key = toDateStr(activity.start_date_local).slice(0, 7); // "YYYY-MM"
-    monthMap.set(key, (monthMap.get(key) ?? 0) + activity.distance / 1000);
+    monthMap.set(key, (monthMap.get(key) ?? 0) + activity.elapsed_time / 60);
   }
 
   return Array.from(monthMap.entries())
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([key, distance]) => {
+    .map(([key, duration]) => {
       const [year, month] = key.split("-").map(Number);
-      return { label: formatMonthLabel(year, month - 1), distance };
+      return { label: formatMonthLabel(year, month - 1), duration };
     });
 }
 

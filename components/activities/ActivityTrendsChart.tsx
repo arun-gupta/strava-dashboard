@@ -19,6 +19,12 @@ interface Props {
   activities: Activity[];
 }
 
+function formatMinutes(minutes: number): string {
+  const h = Math.floor(minutes / 60);
+  const m = Math.round(minutes % 60);
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
 export default function ActivityTrendsChart({ activities }: Props) {
   const [grouping, setGrouping] = useState<"weekly" | "monthly">("weekly");
   const [activityType, setActivityType] = useState<string | null>(null);
@@ -33,10 +39,10 @@ export default function ActivityTrendsChart({ activities }: Props) {
     return fn(activities, activityType ?? undefined);
   }, [activities, grouping, activityType]);
 
-  const totalDistance = periods.reduce((sum, p) => sum + p.distance, 0);
-  const periodCount = periods.filter((p) => p.distance > 0).length;
+  const totalMinutes = periods.reduce((sum, p) => sum + p.duration, 0);
+  const periodCount = periods.filter((p) => p.duration > 0).length;
   const periodLabel = grouping === "weekly" ? "week" : "month";
-  const summaryText = `${totalDistance.toFixed(1)} km across ${periodCount} ${periodLabel}${periodCount !== 1 ? "s" : ""}`;
+  const summaryText = `${formatMinutes(totalMinutes)} across ${periodCount} ${periodLabel}${periodCount !== 1 ? "s" : ""}`;
 
   function toggleType(type: string) {
     setActivityType((prev) => (prev === type ? null : type));
@@ -108,19 +114,19 @@ export default function ActivityTrendsChart({ activities }: Props) {
           <ComposedChart data={periods} margin={{ top: 20, right: 8, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis dataKey="label" tick={{ fontSize: 11 }} />
-            <YAxis tick={{ fontSize: 11 }} />
-            <Tooltip formatter={(v: number) => [`${v.toFixed(1)} km`, "Distance"]} />
-            <Bar dataKey="distance" fill="#f97316" radius={[3, 3, 0, 0]}>
+            <YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${Math.round(v)}m`} />
+            <Tooltip formatter={(v: number) => [formatMinutes(v), "Duration"]} />
+            <Bar dataKey="duration" fill="#f97316" radius={[3, 3, 0, 0]}>
               <LabelList
-                dataKey="distance"
+                dataKey="duration"
                 position="top"
-                formatter={(v: number) => (v > 0 ? `${v.toFixed(1)}` : "")}
+                formatter={(v: number) => (v > 0 ? formatMinutes(v) : "")}
                 style={{ fontSize: 10, fill: "#374151" }}
               />
             </Bar>
             <Line
               type="monotone"
-              dataKey="distance"
+              dataKey="duration"
               stroke="#9ca3af"
               strokeDasharray="4 2"
               dot={false}

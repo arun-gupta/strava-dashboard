@@ -8,35 +8,39 @@ function makeActivity(
   id: number,
   sport_type: string,
   start_date_local: string,
-  distance: number,
-  elapsed_time: number = 3600
+  elapsed_time: number = 3600,
+  distance: number = 0
 ): Activity {
   return { id, name: `Activity ${id}`, sport_type, type: sport_type, start_date_local, distance, elapsed_time, moving_time: elapsed_time };
 }
 
 // Week of 2026-03-16 (Mon) to 2026-03-22 (Sun)
-const runW1 = makeActivity(1, "Run", "2026-03-16T07:00:00Z", 10000); // Mon Mar 16
-const runW1b = makeActivity(2, "Run", "2026-03-18T07:00:00Z", 5000);  // Wed Mar 18
+// elapsed_time in seconds: 3600 = 60min, 1800 = 30min
+const runW1 = makeActivity(1, "Run", "2026-03-16T07:00:00Z", 3600);   // 60 min
+const runW1b = makeActivity(2, "Run", "2026-03-18T07:00:00Z", 1800);  // 30 min
 
 // Week of 2026-03-23 (Mon) to 2026-03-29 (Sun)
-const rideW2 = makeActivity(3, "Ride", "2026-03-23T07:00:00Z", 30000); // Mon Mar 23
-const runW2 = makeActivity(4, "Run", "2026-03-25T07:00:00Z", 8000);   // Wed Mar 25
+const rideW2 = makeActivity(3, "Ride", "2026-03-23T07:00:00Z", 5400); // 90 min
+const runW2 = makeActivity(4, "Run", "2026-03-25T07:00:00Z", 2700);   // 45 min
 
 // Gap week: 2026-03-30 (Mon) — no activities
 
 // Week of 2026-04-06 (Mon)
-const runW4 = makeActivity(5, "Run", "2026-04-06T07:00:00Z", 12000);  // Mon Apr 6
+const runW4 = makeActivity(5, "Run", "2026-04-06T07:00:00Z", 4200);   // 70 min
 
 // Monthly fixtures
-const janActivity = makeActivity(10, "Run", "2026-01-15T07:00:00Z", 10000);
-const febActivity = makeActivity(11, "Ride", "2026-02-20T07:00:00Z", 20000);
+const janActivity = makeActivity(10, "Run", "2026-01-15T07:00:00Z", 3600);  // 60 min
+const febActivity = makeActivity(11, "Ride", "2026-02-20T07:00:00Z", 7200); // 120 min
 // Gap: March has no activity
-const aprActivity = makeActivity(12, "Run", "2026-04-10T07:00:00Z", 15000);
+const aprActivity = makeActivity(12, "Run", "2026-04-10T07:00:00Z", 5400);  // 90 min
+
+// Weight Training (no distance)
+const weightW1 = makeActivity(6, "WeightTraining", "2026-03-17T09:00:00Z", 3900); // 65 min
 
 // Heatmap fixtures
-const dayA = makeActivity(20, "Run", "2026-03-01T07:00:00Z", 10000, 3600);
-const dayA2 = makeActivity(21, "Ride", "2026-03-01T18:00:00Z", 20000, 5400); // same day
-const dayB = makeActivity(22, "Run", "2026-03-03T07:00:00Z", 8000, 2700);  // day 3, gap on day 2
+const dayA = makeActivity(20, "Run", "2026-03-01T07:00:00Z", 3600);
+const dayA2 = makeActivity(21, "Ride", "2026-03-01T18:00:00Z", 5400); // same day
+const dayB = makeActivity(22, "Run", "2026-03-03T07:00:00Z", 2700);   // day 3, gap on day 2
 
 // --- groupByWeek ---
 
@@ -49,13 +53,13 @@ describe("groupByWeek", () => {
     const result = groupByWeek([runW1]);
     expect(result).toHaveLength(1);
     expect(result[0].label).toBe("Mar 16");
-    expect(result[0].distance).toBeCloseTo(10);
+    expect(result[0].duration).toBeCloseTo(60);
   });
 
   it("groups multiple activities in the same week", () => {
     const result = groupByWeek([runW1, runW1b]);
     expect(result).toHaveLength(1);
-    expect(result[0].distance).toBeCloseTo(15);
+    expect(result[0].duration).toBeCloseTo(90); // 60+30
   });
 
   it("produces one entry per week in chronological order", () => {
@@ -65,35 +69,38 @@ describe("groupByWeek", () => {
     expect(result[1].label).toBe("Mar 23");
   });
 
-  it("fills gap weeks with zero distance", () => {
+  it("fills gap weeks with zero duration", () => {
     // Weeks: Mar 16, Mar 23, Mar 30 (gap), Apr 6
     const result = groupByWeek([runW1, rideW2, runW4]);
     expect(result).toHaveLength(4);
-    const labels = result.map((p) => p.label);
-    expect(labels).toContain("Mar 30");
     const gapWeek = result.find((p) => p.label === "Mar 30");
-    expect(gapWeek?.distance).toBe(0);
+    expect(gapWeek?.duration).toBe(0);
   });
 
   it("respects activityType filter", () => {
     const result = groupByWeek([runW1, rideW2], "Run");
-    // Week of Mar 16 has runW1 (10km); week of Mar 23 has no runs
+    // Week of Mar 16: 60min run; week of Mar 23: 0 (ride filtered out)
     expect(result).toHaveLength(2);
-    expect(result[0].distance).toBeCloseTo(10);
-    expect(result[1].distance).toBe(0);
+    expect(result[0].duration).toBeCloseTo(60);
+    expect(result[1].duration).toBe(0);
   });
 
   it("uses Monday as week start", () => {
-    // runW1 is on 2026-03-16 which IS a Monday
     const result = groupByWeek([runW1]);
     expect(result[0].label).toBe("Mar 16");
   });
 
-  it("combines run and ride in the same week without type filter", () => {
+  it("includes weight training (zero distance) in duration totals", () => {
+    const result = groupByWeek([runW1, weightW1]);
+    expect(result).toHaveLength(1);
+    expect(result[0].duration).toBeCloseTo(60 + 65); // 125 min
+  });
+
+  it("combines run and ride durations in the same week without type filter", () => {
     const result = groupByWeek([runW1, rideW2, runW2]);
-    // Week Mar 16: 10km; Week Mar 23: 30+8=38km
+    // Week Mar 16: 60min; Week Mar 23: 90+45=135min
     expect(result).toHaveLength(2);
-    expect(result[1].distance).toBeCloseTo(38);
+    expect(result[1].duration).toBeCloseTo(135);
   });
 });
 
@@ -108,14 +115,14 @@ describe("groupByMonth", () => {
     const result = groupByMonth([janActivity]);
     expect(result).toHaveLength(1);
     expect(result[0].label).toBe("Jan 2026");
-    expect(result[0].distance).toBeCloseTo(10);
+    expect(result[0].duration).toBeCloseTo(60);
   });
 
   it("groups multiple activities in the same month", () => {
-    const jan2 = makeActivity(99, "Run", "2026-01-28T07:00:00Z", 5000);
+    const jan2 = makeActivity(99, "Run", "2026-01-28T07:00:00Z", 1800);
     const result = groupByMonth([janActivity, jan2]);
     expect(result).toHaveLength(1);
-    expect(result[0].distance).toBeCloseTo(15);
+    expect(result[0].duration).toBeCloseTo(90); // 60+30
   });
 
   it("produces months in chronological order", () => {
@@ -125,20 +132,20 @@ describe("groupByMonth", () => {
     expect(result[1].label).toBe("Feb 2026");
   });
 
-  it("fills gap months with zero distance", () => {
+  it("fills gap months with zero duration", () => {
     // Jan, Feb, (Mar gap), Apr
     const result = groupByMonth([janActivity, febActivity, aprActivity]);
     expect(result).toHaveLength(4);
     const mar = result.find((p) => p.label === "Mar 2026");
-    expect(mar?.distance).toBe(0);
+    expect(mar?.duration).toBe(0);
   });
 
   it("respects activityType filter", () => {
     const result = groupByMonth([janActivity, febActivity], "Run");
-    // Jan: 10km run; Feb: 0 (ride filtered out)
+    // Jan: 60min run; Feb: 0 (ride filtered out)
     expect(result).toHaveLength(2);
-    expect(result[0].distance).toBeCloseTo(10);
-    expect(result[1].distance).toBe(0);
+    expect(result[0].duration).toBeCloseTo(60);
+    expect(result[1].duration).toBe(0);
   });
 });
 

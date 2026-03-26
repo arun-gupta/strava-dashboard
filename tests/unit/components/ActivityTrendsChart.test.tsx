@@ -28,7 +28,7 @@ const activities: Activity[] = [
     type: "Run",
     start_date_local: "2026-03-16T07:00:00Z",
     distance: 10000,
-    elapsed_time: 3600,
+    elapsed_time: 3600,  // 60 min
     moving_time: 3500,
   },
   {
@@ -38,18 +38,18 @@ const activities: Activity[] = [
     type: "Run",
     start_date_local: "2026-03-18T07:00:00Z",
     distance: 5000,
-    elapsed_time: 1800,
+    elapsed_time: 1800,  // 30 min
     moving_time: 1750,
   },
   {
     id: 3,
-    name: "Saturday Ride",
-    sport_type: "Ride",
-    type: "Ride",
+    name: "Saturday Weight Training",
+    sport_type: "WeightTraining",
+    type: "WeightTraining",
     start_date_local: "2026-03-21T10:00:00Z",
-    distance: 30000,
-    elapsed_time: 5400,
-    moving_time: 5200,
+    distance: 0,
+    elapsed_time: 3900,  // 65 min
+    moving_time: 3900,
   },
   {
     id: 4,
@@ -58,12 +58,12 @@ const activities: Activity[] = [
     type: "Run",
     start_date_local: "2026-03-23T07:00:00Z",
     distance: 8000,
-    elapsed_time: 2700,
+    elapsed_time: 2700,  // 45 min
     moving_time: 2650,
   },
 ];
 
-// --- US1: Weekly Distance Chart ---
+// --- US1: Weekly Duration Chart ---
 
 describe("ActivityTrendsChart — US1 weekly chart", () => {
   it("renders a chart card on the page", () => {
@@ -71,10 +71,10 @@ describe("ActivityTrendsChart — US1 weekly chart", () => {
     expect(screen.getByTestId("composed-chart")).toBeInTheDocument();
   });
 
-  it("displays total distance summary in the header", () => {
+  it("displays total duration summary in the header", () => {
     render(<ActivityTrendsChart activities={activities} />);
-    // Total: 10+5+30+8 = 53 km across 2 weeks
-    expect(screen.getByText(/km across/i)).toBeInTheDocument();
+    // Total: 60+30+65+45 = 200 min = 3h 20m across 2 weeks
+    expect(screen.getByText(/across/i)).toBeInTheDocument();
   });
 
   it("weekly toggle button is active by default", () => {
@@ -82,6 +82,12 @@ describe("ActivityTrendsChart — US1 weekly chart", () => {
     const weeklyBtn = screen.getByRole("button", { name: /weekly/i });
     expect(weeklyBtn).toBeInTheDocument();
     expect(weeklyBtn.className).toMatch(/font-semibold|active|ring|border/);
+  });
+
+  it("includes weight training in the summary (zero-distance activities count)", () => {
+    render(<ActivityTrendsChart activities={activities} />);
+    // 200 min total = 3h 20m
+    expect(screen.getByText(/3h 20m across/i)).toBeInTheDocument();
   });
 });
 
@@ -101,18 +107,17 @@ describe("ActivityTrendsChart — US2 toggle", () => {
     expect(weeklyBtn.className).not.toEqual(monthlyBtn.className);
   });
 
-  it("clicking Monthly updates the active state to Monthly", () => {
+  it("clicking Monthly updates the summary to show months", () => {
     render(<ActivityTrendsChart activities={activities} />);
     fireEvent.click(screen.getByRole("button", { name: /monthly/i }));
-    // Summary text should contain "month"
-    expect(screen.getByText(/km across \d+ month/i)).toBeInTheDocument();
+    expect(screen.getByText(/across \d+ month/i)).toBeInTheDocument();
   });
 
   it("clicking Weekly after Monthly restores weekly view", () => {
     render(<ActivityTrendsChart activities={activities} />);
     fireEvent.click(screen.getByRole("button", { name: /monthly/i }));
     fireEvent.click(screen.getByRole("button", { name: /weekly/i }));
-    expect(screen.getByText(/km across \d+ week/i)).toBeInTheDocument();
+    expect(screen.getByText(/across \d+ week/i)).toBeInTheDocument();
   });
 });
 
@@ -121,16 +126,22 @@ describe("ActivityTrendsChart — US2 toggle", () => {
 describe("ActivityTrendsChart — US3 type filter", () => {
   it("renders type filter buttons for each unique sport_type", () => {
     render(<ActivityTrendsChart activities={activities} />);
-    expect(screen.getByRole("button", { name: /run/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /ride/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^run$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /weighttraining/i })).toBeInTheDocument();
   });
 
-  it("selecting a type updates the chart header to reflect filtered distance", () => {
+  it("selecting Run shows only run duration in summary", () => {
     render(<ActivityTrendsChart activities={activities} />);
     fireEvent.click(screen.getByRole("button", { name: /^run$/i }));
-    // Only runs: 10+5+8 = 23km
-    const summary = screen.getByText(/km across/i);
-    expect(summary.textContent).toMatch(/23/);
+    // Runs only: 60+30+45 = 135 min = 2h 15m
+    expect(screen.getByText(/2h 15m across/i)).toBeInTheDocument();
+  });
+
+  it("selecting WeightTraining shows weight training duration in summary", () => {
+    render(<ActivityTrendsChart activities={activities} />);
+    fireEvent.click(screen.getByRole("button", { name: /weighttraining/i }));
+    // WeightTraining: 65 min = 1h 5m
+    expect(screen.getByText(/1h 5m across/i)).toBeInTheDocument();
   });
 
   it("clicking the same type again clears the filter", () => {
@@ -138,8 +149,7 @@ describe("ActivityTrendsChart — US3 type filter", () => {
     const runBtn = screen.getByRole("button", { name: /^run$/i });
     fireEvent.click(runBtn);
     fireEvent.click(runBtn);
-    // Back to all: 53km
-    const summary = screen.getByText(/km across/i);
-    expect(summary.textContent).toMatch(/53/);
+    // Back to all: 3h 20m
+    expect(screen.getByText(/3h 20m across/i)).toBeInTheDocument();
   });
 });
