@@ -11,12 +11,19 @@ interface Props {
   onFilterChange?: (filtered: Activity[]) => void;
 }
 
+function getDateBounds(activities: Activity[]): { min: string | null; max: string | null } {
+  if (activities.length === 0) return { min: null, max: null };
+  const dates = activities.map((a) => a.start_date_local.slice(0, 10)).sort();
+  return { min: dates[0], max: dates[dates.length - 1] };
+}
+
 export default function ActivityFilterPanel({ activities, onFilterChange }: Props) {
+  const { min: minDate, max: maxDate } = getDateBounds(activities);
   const [types, setTypes] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [matchMode, setMatchMode] = useState<"fuzzy" | "exact">("fuzzy");
-  const [startDate, setStartDate] = useState<string | null>(null);
-  const [endDate, setEndDate] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState<string | null>(minDate);
+  const [endDate, setEndDate] = useState<string | null>(maxDate);
 
   const uniqueTypes = Array.from(new Set(activities.map((a) => a.sport_type)));
 
