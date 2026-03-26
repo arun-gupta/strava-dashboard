@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { fetchRecentActivities, StravaAuthError } from "@/lib/strava";
-import ActivityRow from "./ActivityRow";
+import ActivityFilterPanel from "./ActivityFilterPanel";
 
 interface Props {
   accessToken: string;
@@ -23,11 +23,5 @@ export default async function RecentActivitiesList({ accessToken }: Props) {
     );
   }
 
-  return (
-    <div className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
-      {activities.map((activity) => (
-        <ActivityRow key={activity.id} activity={activity} />
-      ))}
-    </div>
-  );
+  return <ActivityFilterPanel activities={activities} />;
 }
