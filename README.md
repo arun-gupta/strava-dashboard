@@ -13,6 +13,7 @@ Built following [SpecKit](https://github.com/github/spec-kit) Specification-Driv
 - **All-time running stats** — total run count, total distance (km), and total elapsed time at a glance
 - **Recent activities** — last 10 activities with type icon, name, date, distance, pace, and elapsed time; each links to the Strava activity page
 - **Filtering and search** — filter activities by type (multi-select), search by name (fuzzy or exact match), and filter by date range; all filters compose simultaneously
+- **Activity trends chart and heatmap** — bar chart with trend line showing weekly or monthly distance totals, activity type filter, and a day-by-day heatmap showing training consistency with intensity colouring based on elapsed time
 
 ## Getting Started
 
