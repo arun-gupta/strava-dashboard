@@ -22,7 +22,7 @@ interface Props {
 function formatMinutes(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = Math.round(minutes % 60);
-  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+  return `${h}h ${m}m`;
 }
 
 export default function ActivityTrendsChart({ activities }: Props) {
@@ -116,12 +116,28 @@ export default function ActivityTrendsChart({ activities }: Props) {
             <XAxis dataKey="label" tick={{ fontSize: 11 }} />
             <YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${Math.round(v)}m`} />
             <Tooltip formatter={(v: number) => [formatMinutes(v), "Duration"]} />
-            <Bar dataKey="duration" fill="#f97316" radius={[3, 3, 0, 0]}>
+            <Bar dataKey="duration" fill="#f97316" radius={[3, 3, 0, 0]} minPointSize={2}>
               <LabelList
                 dataKey="duration"
-                position="top"
-                formatter={(v: number) => (v > 0 ? formatMinutes(v) : "")}
-                style={{ fontSize: 10, fill: "#374151" }}
+                content={(props: Record<string, unknown>) => {
+                  const x = props.x as number;
+                  const y = props.y as number;
+                  const width = props.width as number;
+                  const value = props.value as number;
+                  // Zero-height bars have their top at the baseline — lift label above it
+                  const labelY = value === 0 ? y - 8 : y - 4;
+                  return (
+                    <text
+                      x={x + width / 2}
+                      y={labelY}
+                      textAnchor="middle"
+                      fontSize={10}
+                      fill="#374151"
+                    >
+                      {formatMinutes(value)}
+                    </text>
+                  );
+                }}
               />
             </Bar>
             <Line
