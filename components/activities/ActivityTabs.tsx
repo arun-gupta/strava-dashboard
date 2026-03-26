@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import type { Activity } from "@/lib/strava";
 import ActivityFilterPanel from "./ActivityFilterPanel";
 import ActivityTrendsChart from "./ActivityTrendsChart";
@@ -14,6 +14,11 @@ type Tab = "activities" | "trends";
 
 export default function ActivityTabs({ activities }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>("activities");
+  const [filteredActivities, setFilteredActivities] = useState<Activity[]>(activities);
+
+  const handleFilterChange = useCallback((filtered: Activity[]) => {
+    setFilteredActivities(filtered);
+  }, []);
 
   const activeClass =
     "px-4 py-2 text-sm font-semibold border-b-2 border-orange-500 text-orange-600";
@@ -40,11 +45,11 @@ export default function ActivityTabs({ activities }: Props) {
 
       {/* Tab content */}
       {activeTab === "activities" ? (
-        <ActivityFilterPanel activities={activities} />
+        <ActivityFilterPanel activities={activities} onFilterChange={handleFilterChange} />
       ) : (
         <div className="space-y-4">
-          <ActivityTrendsChart activities={activities} />
-          <ActivityHeatmap activities={activities} />
+          <ActivityTrendsChart activities={filteredActivities} />
+          <ActivityHeatmap activities={filteredActivities} />
         </div>
       )}
     </div>

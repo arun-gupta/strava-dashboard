@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Activity } from "@/lib/strava";
 import { getActivityMeta } from "@/lib/utils/activity";
 import { filterActivities } from "@/lib/utils/filter";
@@ -8,9 +8,10 @@ import ActivityRow from "./ActivityRow";
 
 interface Props {
   activities: Activity[];
+  onFilterChange?: (filtered: Activity[]) => void;
 }
 
-export default function ActivityFilterPanel({ activities }: Props) {
+export default function ActivityFilterPanel({ activities, onFilterChange }: Props) {
   const [types, setTypes] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [matchMode, setMatchMode] = useState<"fuzzy" | "exact">("fuzzy");
@@ -26,6 +27,11 @@ export default function ActivityFilterPanel({ activities }: Props) {
     startDate,
     endDate,
   });
+
+  useEffect(() => {
+    onFilterChange?.(filtered);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtered.length, types, searchQuery, matchMode, startDate, endDate]);
 
   const invalidDateRange =
     startDate !== null && endDate !== null && startDate > endDate;
