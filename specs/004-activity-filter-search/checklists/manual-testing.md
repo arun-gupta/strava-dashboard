@@ -8,49 +8,49 @@
 
 ## Setup
 
-- [ ] `npm run dev` starts without errors
-- [ ] Logged in with a real Strava account that has at least 2 different activity types (e.g. a Run and a Ride) in the most recent 10 activities
+- [x] `npm run dev` starts without errors
+- [x] Logged in with a real Strava account that has at least 2 different activity types (e.g. a Run and a Ride) in the most recent 10 activities
 
 ---
 
 ## US1 — Filter Activities by Type
 
-- [ ] Type filter buttons appear above the activity list, showing only types present in the current 10 activities
-- [ ] Selecting one type shows only activities of that type
-- [ ] Selecting a second type shows activities of both types
-- [ ] Deselecting all types restores the full list of 10 activities
-- [ ] Activity count indicator updates correctly (e.g. "2 of 10 activities")
-- [ ] Filtering is instant with no page reload or visible delay
+- [x] Type filter buttons appear above the activity list, showing only types present in the current 10 activities
+- [x] Selecting one type shows only activities of that type
+- [x] Selecting a second type shows activities of both types
+- [x] Deselecting all types restores the full list of 10 activities
+- [x] Activity count indicator updates correctly (e.g. "2 of 10 activities")
+- [x] Filtering is instant with no page reload or visible delay
 
 ---
 
 ## US2 — Search Activities by Name
 
-- [ ] Search input is visible above the activity list
-- [ ] Typing a partial word (fuzzy mode) filters the list in real time to matching activities
-- [ ] Search is case-insensitive (e.g. "morning" matches "Morning Run")
-- [ ] Toggling to exact match shows only activities whose name contains the exact typed string
-- [ ] Clearing the search box restores the full (or type-filtered) list
-- [ ] Activity count indicator updates correctly when search is active
+- [x] Search input is visible above the activity list
+- [x] Typing a partial word (fuzzy mode) filters the list in real time to matching activities
+- [x] Search is case-insensitive (e.g. "morning" matches "Morning Run")
+- [x] Toggling to exact match shows only activities whose name contains the exact typed string
+- [x] Clearing the search box restores the full (or type-filtered) list
+- [x] Activity count indicator updates correctly when search is active
 
 ---
 
 ## US3 — Filter Activities by Date Range
 
-- [ ] Start date and end date inputs are visible
-- [ ] Setting a start date hides activities before that date
-- [ ] Setting an end date hides activities after that date
-- [ ] Both dates set together shows only activities within the range (inclusive)
-- [ ] Clearing both dates restores the full (or otherwise filtered) list
-- [ ] Setting a start date after the end date shows no activities and displays a validation hint
+- [x] Start date and end date inputs are visible
+- [x] Setting a start date hides activities before that date
+- [x] Setting an end date hides activities after that date
+- [x] Both dates set together shows only activities within the range (inclusive)
+- [x] Clearing both dates restores the full (or otherwise filtered) list
+- [x] Setting a start date after the end date shows no activities and displays a validation hint
 
 ---
 
 ## US4 — Combined Filters
 
-- [ ] Type filter + search applied together shows only activities matching both
-- [ ] Type filter + date range + search all active simultaneously shows only activities satisfying all three
-- [ ] Activity count indicator is accurate under combined filters
+- [x] Type filter + search applied together shows only activities matching both
+- [x] Type filter + date range + search all active simultaneously shows only activities satisfying all three
+- [x] Activity count indicator is accurate under combined filters
 
 ---
 
@@ -61,9 +61,9 @@
 - [x] No activities matching a filter — covered by unit test (empty state displayed)
 - [x] Activity with no name excluded from search results — covered by unit test
 - [x] Start date after end date produces no results — covered by unit test
-- [ ] All 10 activities are filtered out — empty state message is shown, not a blank list
-- [ ] Switching between fuzzy and exact match while a search term is entered — results update immediately
-- [ ] Applying filters then refreshing the page — all filters reset to defaults
+- [x] All 10 activities are filtered out — empty state message is shown, not a blank list
+- [x] Switching between fuzzy and exact match while a search term is entered — results update immediately
+- [x] Applying filters then refreshing the page — all filters reset to defaults
 
 ---
 
