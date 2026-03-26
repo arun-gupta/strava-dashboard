@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:3000` and sign in with Strava. The dashboard will show the trends chart and heatmap below the activity filter panel.
+Visit `http://localhost:3000` and sign in with Strava. The dashboard shows two tabs under Recent Activities: **Activities** (filter panel) and **Trends & Heatmap** (chart + heatmap).
 
 ## Run Tests
 
@@ -29,10 +29,11 @@ npm run test:watch
 
 ## Test the Charts Manually
 
-1. **Weekly chart** — verify bars appear with distance labels above each non-zero bar and a trend line overlay
-2. **Total summary** — verify the header shows total distance and period count (e.g. "42.5 km across 4 weeks")
-3. **Monthly toggle** — click "Monthly" and verify bars regroup by calendar month
-4. **Type filter** — select a single sport type and verify the chart updates to show only that type's distance
-5. **Heatmap** — verify active days are highlighted with intensity reflecting elapsed time
-6. **Heatmap tooltip** — hover over an active day and verify date and elapsed time appear
-7. **Empty state** — filter to a type with no activities and verify an empty state message appears
+1. **Tab navigation** — verify "Activities" and "Trends & Heatmap" tabs are visible; clicking each switches the content instantly
+2. **Weekly chart** — on the Trends tab, verify bars appear with duration labels above each non-zero bar and a trend line overlay
+3. **Total summary** — verify the header shows total elapsed time and period count (e.g. "3h 20m across 2 weeks")
+4. **Monthly toggle** — click "Monthly" and verify bars regroup by calendar month
+5. **Type filter** — select a sport type (including zero-distance types like Weight Training) and verify the chart updates
+6. **Heatmap** — verify active days are highlighted with intensity reflecting elapsed time
+7. **Heatmap tooltip** — hover over an active day and verify date and elapsed time appear
+8. **Empty state** — filter to a type with no activities and verify an empty state message appears

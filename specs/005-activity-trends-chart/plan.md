@@ -4,7 +4,7 @@
 
 ## Summary
 
-Add two visualisation cards to the dashboard: a composed bar + trend line chart showing weekly/monthly distance over time, and a heatmap calendar showing training consistency by day. Both derive data from the existing 10 fetched activities — no additional API calls. Chart state (grouping toggle, type filter) lives in a new `ActivityTrendsChart` Client Component. The heatmap lives in a separate `ActivityHeatmap` Client Component. Pure data-transformation utilities go in `lib/utils/trends.ts` for testability.
+Add a tabbed interface to the dashboard: an **Activities** tab (existing filter panel) and a **Trends & Heatmap** tab with a composed bar + trend line chart showing weekly/monthly elapsed time, and a heatmap calendar showing training consistency by day. Both tabs derive data from the existing 10 fetched activities — no additional API calls. Tab state lives in a new `ActivityTabs` Client Component. Chart state (grouping toggle, type filter) lives in `ActivityTrendsChart`. The heatmap lives in `ActivityHeatmap`. Pure data-transformation utilities go in `lib/utils/trends.ts` for testability.
 
 ## Technical Context
 
@@ -47,12 +47,13 @@ specs/005-activity-trends-chart/
 
 ```text
 components/activities/
+├── ActivityTabs.tsx            # NEW — 'use client', tab bar switching Activities ↔ Trends & Heatmap
 ├── ActivityTrendsChart.tsx     # NEW — 'use client', owns grouping toggle + type filter state
 ├── ActivityHeatmap.tsx         # NEW — 'use client', renders heatmap grid
 ├── ActivityFilterPanel.tsx     # EXISTING — unchanged
 ├── ActivityRow.tsx             # EXISTING — unchanged
 ├── ActivitiesSkeleton.tsx      # EXISTING — unchanged
-└── RecentActivitiesList.tsx    # EXISTING — passes activities to ActivityTrendsChart
+└── RecentActivitiesList.tsx    # EXISTING — renders ActivityTabs
 
 lib/utils/
 ├── trends.ts                   # NEW — groupByWeek, groupByMonth, buildHeatmap
@@ -70,16 +71,20 @@ tests/unit/
 ```
 RecentActivitiesList (Server Component)
   └── fetches activities from Strava (server-side)
-  └── ActivityFilterPanel (existing Client Component)
-        └── filtered activity list
-  └── ActivityTrendsChart (new Client Component — 'use client')
-        └── owns: grouping ('weekly'|'monthly'), activityType state
-        └── renders: toggle buttons, type filter, total summary, ComposedChart
-        └── uses: groupByWeek / groupByMonth from lib/utils/trends.ts
-  └── ActivityHeatmap (new Client Component — 'use client')
-        └── renders: CSS grid of day cells with Tailwind intensity colours
-        └── renders: tooltip on hover (date + elapsed time)
-        └── uses: buildHeatmap from lib/utils/trends.ts
+  └── ActivityTabs (new Client Component — 'use client')
+        └── owns: activeTab ('activities' | 'trends') state
+        └── Tab: Activities
+              └── ActivityFilterPanel (existing Client Component)
+                    └── filtered activity list
+        └── Tab: Trends & Heatmap
+              └── ActivityTrendsChart (new Client Component — 'use client')
+                    └── owns: grouping ('weekly'|'monthly'), activityType state
+                    └── renders: toggle buttons, type filter, total summary, ComposedChart
+                    └── uses: groupByWeek / groupByMonth from lib/utils/trends.ts
+              └── ActivityHeatmap (new Client Component — 'use client')
+                    └── renders: CSS grid of day cells with Tailwind intensity colours
+                    └── renders: tooltip on hover (date + elapsed time)
+                    └── uses: buildHeatmap from lib/utils/trends.ts
 ```
 
 ## Implementation Phases

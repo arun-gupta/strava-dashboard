@@ -50,14 +50,14 @@ A single cell in the activity heatmap.
 1. Filter by `activityType` if provided (match on `sport_type`)
 2. Find the Monday of the week containing the earliest activity
 3. Find the Monday of the week containing the latest activity
-4. For each week in that range, sum distances of activities whose `start_date_local` falls in the week
+4. For each week in that range, sum `elapsed_time` (converted to minutes) of activities whose `start_date_local` falls in the week
 5. Return `TrendPeriod[]` with label format "MMM D" (e.g. "Mar 20") for the week's Monday
 
 ### groupByMonth(activities, activityType?)
 
 1. Filter by `activityType` if provided
 2. Find the earliest and latest calendar months spanned by the activities
-3. For each month in that range, sum distances of activities in that month
+3. For each month in that range, sum `elapsed_time` (converted to minutes) of activities in that month
 4. Return `TrendPeriod[]` with label format "MMM YYYY" (e.g. "Mar 2026")
 
 ### buildHeatmap(activities)
