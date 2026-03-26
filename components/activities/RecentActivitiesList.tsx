@@ -1,8 +1,6 @@
 import { redirect } from "next/navigation";
 import { fetchRecentActivities, StravaAuthError } from "@/lib/strava";
-import ActivityFilterPanel from "./ActivityFilterPanel";
-import ActivityTrendsChart from "./ActivityTrendsChart";
-import ActivityHeatmap from "./ActivityHeatmap";
+import ActivityTabs from "./ActivityTabs";
 
 interface Props {
   accessToken: string;
@@ -25,11 +23,5 @@ export default async function RecentActivitiesList({ accessToken }: Props) {
     );
   }
 
-  return (
-    <div className="space-y-4">
-      <ActivityFilterPanel activities={activities} />
-      <ActivityTrendsChart activities={activities} />
-      <ActivityHeatmap activities={activities} />
-    </div>
-  );
+  return <ActivityTabs activities={activities} />;
 }
