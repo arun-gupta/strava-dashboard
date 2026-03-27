@@ -4,7 +4,7 @@
 
 ## Summary
 
-Add a tabbed interface to the dashboard: an **Activities** tab (existing filter panel) and a **Trends & Heatmap** tab with a composed bar + trend line chart showing weekly/monthly elapsed time, and a heatmap calendar showing training consistency by day. Both tabs derive data from the existing 10 fetched activities — no additional API calls. Tab state lives in a new `ActivityTabs` Client Component. Chart state (grouping toggle, type filter) lives in `ActivityTrendsChart`. The heatmap lives in `ActivityHeatmap`. Pure data-transformation utilities go in `lib/utils/trends.ts` for testability.
+Add a tabbed interface to the dashboard: an **Activities** tab (existing filter panel) and a **Trends & Heatmap** tab with a composed bar + trend line chart showing weekly/monthly elapsed time, and a heatmap calendar showing training consistency by day. Both tabs derive data from the existing fetched activities (up to 180) — no additional API calls. Tab state lives in a new `ActivityTabs` Client Component. Chart state (grouping toggle, type filter) lives in `ActivityTrendsChart`. The heatmap lives in `ActivityHeatmap`. Pure data-transformation utilities go in `lib/utils/trends.ts` for testability.
 
 ## Technical Context
 
@@ -16,7 +16,7 @@ Add a tabbed interface to the dashboard: an **Activities** tab (existing filter 
 **Project Type**: Web application
 **Performance Goals**: Toggle re-render under 100ms (client-side only, no network)
 **Constraints**: No new runtime dependencies. No additional Strava API calls. State resets on page reload.
-**Scale/Scope**: Max 10 activities at all times
+**Scale/Scope**: Up to 180 activities (6 months)
 
 ## Constitution Check
 

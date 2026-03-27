@@ -105,7 +105,7 @@ export async function fetchAthleteStats(
 }
 
 export async function fetchRecentActivities(accessToken: string): Promise<Activity[]> {
-  const res = await fetch("https://www.strava.com/api/v3/athlete/activities?per_page=10", {
+  const res = await fetch("https://www.strava.com/api/v3/athlete/activities?per_page=180", {
     headers: { Authorization: `Bearer ${accessToken}` },
     cache: "no-store",
   });

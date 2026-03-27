@@ -188,7 +188,7 @@ const mockActivitiesResponse = [
 ];
 
 describe("fetchRecentActivities", () => {
-  it("calls GET /athlete/activities with per_page=10 and Bearer token", async () => {
+  it("calls GET /athlete/activities with per_page=180 and Bearer token", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
@@ -200,7 +200,7 @@ describe("fetchRecentActivities", () => {
     await fetchRecentActivities(mockToken);
 
     expect(fetch).toHaveBeenCalledWith(
-      "https://www.strava.com/api/v3/athlete/activities?per_page=10",
+      "https://www.strava.com/api/v3/athlete/activities?per_page=180",
       expect.objectContaining({
         headers: expect.objectContaining({
           Authorization: `Bearer ${mockToken}`,

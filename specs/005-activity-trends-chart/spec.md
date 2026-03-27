@@ -114,12 +114,12 @@ As an athlete, I want to see a heatmap calendar showing my activity days, so I c
 - **SC-001**: The trends chart is visible on the dashboard without any additional user action after login.
 - **SC-002**: Toggling between weekly and monthly view updates the chart in under 100ms with no network call.
 - **SC-003**: Distance values shown in the chart match the sum of distances in the activity list for each period.
-- **SC-004**: The chart renders correctly for athletes with 1 to 10 activities spanning 1 to 10 weeks.
+- **SC-004**: The chart renders correctly for athletes with 1 to 180 activities spanning multiple weeks and months.
 - **SC-005**: The heatmap correctly reflects activity presence and relative intensity for all days in the fetched activity range.
 
 ## Assumptions
 
-- Chart data is derived from the existing 10 most recent activities already fetched for the dashboard — no additional Strava API calls are made.
+- Chart data is derived from the fetched activities (up to 180, ~6 months) already fetched for the dashboard — no additional Strava API calls are made.
 - Distance is always displayed in kilometres to match the rest of the dashboard.
 - Weekly grouping uses Monday as the start of the week (ISO standard).
 - The chart covers only the range spanned by the fetched activities, not a fixed lookback window.
