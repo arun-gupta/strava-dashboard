@@ -94,16 +94,12 @@ export default function ActivityFilterPanel({ activities, onFilterChange }: Prop
         <input
           type="date"
           value={startDate ?? ""}
-          min={minDate ?? undefined}
-          max={endDate ?? maxDate ?? undefined}
           onChange={(e) => setStartDate(e.target.value || null)}
           className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400"
         />
         <input
           type="date"
           value={endDate ?? ""}
-          min={startDate ?? minDate ?? undefined}
-          max={maxDate ?? undefined}
           onChange={(e) => setEndDate(e.target.value || null)}
           className="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400"
         />
