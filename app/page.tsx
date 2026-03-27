@@ -30,7 +30,7 @@ export default async function LandingPage({
       <div className="text-center space-y-6 max-w-md px-4">
         <h1 className="text-4xl font-bold text-gray-900">Strava Dashboard</h1>
         <p className="text-lg text-gray-600">
-          Visualize your running data. Connect your Strava account to get started.
+          Visualize your Strava activities. Connect your account to get started.
         </p>
         {error && <ErrorMessage error={error} />}
         <div className="flex justify-center">
