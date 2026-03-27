@@ -9,7 +9,7 @@ Returns the authenticated athlete's activities in reverse chronological order.
 **Request**
 
 ```
-GET https://www.strava.com/api/v3/athlete/activities?per_page=10
+GET https://www.strava.com/api/v3/athlete/activities?per_page=180
 Authorization: Bearer <access_token>
 ```
 

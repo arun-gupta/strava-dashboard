@@ -33,5 +33,5 @@
 
 - US1 (type filter) and US2 (search) are independently deliverable as P1/P2
 - US3 (date range) and US4 (combined filters) are P3 — polish on top of the core
-- All four user stories operate client-side on the 10 fetched activities — no API scope
+- All four user stories operate client-side on the up to 180 fetched activities — no API scope
 - Fuzzy vs exact match toggle is unique to this spec; assumption documented that fuzzy is the default

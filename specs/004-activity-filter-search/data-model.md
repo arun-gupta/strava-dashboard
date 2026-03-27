@@ -66,4 +66,4 @@ Active when `startDate` or `endDate` is set.
 
 ## Type Options
 
-Derived dynamically from the current activity list — only types present in the fetched 10 activities are shown as filter options. Type labels come from the existing `getActivityMeta()` utility (e.g. "Run", "Ride", "Swim", "Hike").
+Derived dynamically from the current activity list — only types present in the fetched activities (up to 180) are shown as filter options. Type labels come from the existing `getActivityMeta()` utility (e.g. "Run", "Ride", "Swim", "Hike").

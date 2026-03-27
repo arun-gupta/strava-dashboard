@@ -101,7 +101,7 @@ While the activity list is loading, a skeleton is shown. If the athlete has no r
 - The athlete is already authenticated (spec 001 complete)
 - The Strava `read` OAuth scope is sufficient to access recent activities
 - All activity types are displayed — runs, rides, swims, hikes, and any other Strava activity types
-- The list shows the 10 most recent activities
+- The list shows the 180 most recent activities
 - Distance is displayed in kilometres (Strava returns metres)
 - Elapsed time is displayed as hours and minutes (e.g. "1h 04m")
 - Pace is calculated as elapsed time divided by distance (min/km)

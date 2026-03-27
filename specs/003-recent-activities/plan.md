@@ -5,7 +5,7 @@
 
 ## Summary
 
-Fetch and display the authenticated athlete's 10 most recent Strava activities on the dashboard. Each row shows an activity-type icon, name, date, distance, elapsed time, and pace. Data is fetched server-side. Loading is handled via React Suspense with a skeleton; empty and error states are handled inline and via the existing `error.tsx` boundary.
+Fetch and display the authenticated athlete's 180 most recent Strava activities on the dashboard. Each row shows an activity-type icon, name, date, distance, elapsed time, and pace. Data is fetched server-side. Loading is handled via React Suspense with a skeleton; empty and error states are handled inline and via the existing `error.tsx` boundary.
 
 ## Technical Context
 
@@ -17,7 +17,7 @@ Fetch and display the authenticated athlete's 10 most recent Strava activities o
 **Project Type**: Web application (feature addition to existing Next.js app)
 **Performance Goals**: Activities list loads within 3 seconds (SC-001)
 **Constraints**: Strava access token from session; `cache: "no-store"`; token never exposed to browser
-**Scale/Scope**: Single authenticated athlete; 10 most recent activities
+**Scale/Scope**: Single authenticated athlete; 180 most recent activities
 
 ## Constitution Check
 

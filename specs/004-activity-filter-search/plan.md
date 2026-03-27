@@ -16,7 +16,7 @@ Add client-side filtering and search to the recent activities list on the dashbo
 **Project Type**: Web application
 **Performance Goals**: Filter results update within 100ms of any user input
 **Constraints**: No new runtime dependencies. No additional Strava API calls. Filters reset on page reload.
-**Scale/Scope**: Max 10 activities in the list at all times
+**Scale/Scope**: Up to 180 activities in the list at all times
 
 ## Constitution Check
 

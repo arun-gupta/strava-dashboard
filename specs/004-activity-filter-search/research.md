@@ -7,7 +7,7 @@
 
 **Decision**: Implement both modes in-house with no new dependency.
 
-**Rationale**: With a maximum of 10 activities, there is no performance case for a dedicated search library. The spec defines fuzzy as "finds 'morning run' when typing 'morn'" — this is case-insensitive substring matching, not Levenshtein distance or token ranking. Exact match is case-sensitive substring matching.
+**Rationale**: With a maximum of 180 activities, there is no performance case for a dedicated search library. The spec defines fuzzy as "finds 'morning run' when typing 'morn'" — this is case-insensitive substring matching, not Levenshtein distance or token ranking. Exact match is case-sensitive substring matching.
 
 - Fuzzy: `activityName.toLowerCase().includes(query.toLowerCase())`
 - Exact: `activityName.includes(query)`

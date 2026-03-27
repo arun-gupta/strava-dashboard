@@ -98,14 +98,14 @@ An athlete uses type filter, date range, and search together. All active filters
 - **FR-009**: System MUST filter activities to those whose date falls within the selected range (inclusive)
 - **FR-010**: System MUST apply all active filters and search simultaneously
 - **FR-011**: System MUST show a friendly empty state when no activities match the active filters and search
-- **FR-012**: System MUST operate entirely client-side on the already-fetched 10 activities — no additional API calls
+- **FR-012**: System MUST operate entirely client-side on the already-fetched activities (up to 180) — no additional API calls
 - **FR-013**: System MUST show a count of currently displayed activities vs total (e.g. "3 of 10 activities")
 - **FR-014**: System MUST show a validation hint when the start date is after the end date
 
 ### Key Entities
 
 - **ActivityFilter**: The combined state of active type selections, date range, search term, and match mode applied to the activity list
-- **FilteredActivityList**: The subset of the 10 fetched activities that satisfies all active filter and search conditions
+- **FilteredActivityList**: The subset of the up to 180 fetched activities that satisfies all active filter and search conditions
 
 ## Success Criteria *(mandatory)*
 

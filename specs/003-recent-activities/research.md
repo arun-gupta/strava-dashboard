@@ -4,8 +4,8 @@
 
 ## Decision 1: Strava API Endpoint
 
-- **Decision**: `GET /athlete/activities` with `per_page=10`
-- **Rationale**: Returns the authenticated athlete's activities in reverse chronological order. The `per_page` parameter limits to the 10 most recent. No pagination needed for v1.
+- **Decision**: `GET /athlete/activities` with `per_page=180`
+- **Rationale**: Returns the authenticated athlete's activities in reverse chronological order. The `per_page` parameter limits to the 180 most recent. No pagination needed for v1.
 - **Alternatives considered**: `GET /activities/{id}` — fetches a single activity; not suitable for a list.
 
 ## Decision 2: Activity Type Icons
@@ -70,7 +70,7 @@ CamelCase `sport_type` values are split into display labels using a utility func
 
 ## Resolved Unknowns
 
-- ✅ Endpoint: `GET /athlete/activities?per_page=10`
+- ✅ Endpoint: `GET /athlete/activities?per_page=180`
 - ✅ Icons: `react-icons` / Font Awesome 6
 - ✅ Type mapping: static map in `lib/utils/activity.ts` with CamelCase fallback
 - ✅ Pace: `elapsed_time / distance`, null for zero-distance activities
