@@ -57,6 +57,7 @@ Find root causes. No temporary fixes. Senior developer standards.
 - Run `npm test && npm run lint` after every meaningful change
 - If a requirement is ambiguous, ask — don't assume
 - If specs conflict, `spec.md` acceptance criteria take precedence — flag the conflict before proceeding.
+- **If implementation diverges from the spec** (different data model, UI, API behaviour, or scope), update the affected spec documents in the same commit — never leave specs stale. This includes `spec.md`, `plan.md`, `data-model.md`, `research.md`, `quickstart.md`, and any `contracts/` files.
 
 
 ## Definition of Done
@@ -73,6 +74,7 @@ A feature is complete when all of the following are true:
 
 **Documentation**
 - `README.md` is updated
+- All spec documents (`spec.md`, `plan.md`, `data-model.md`, `research.md`, `quickstart.md`, `contracts/`) reflect the current implementation — no stale data models, API parameters, or UI descriptions
 
 Do not open a PR until every item above is checked off.
 
@@ -80,4 +82,4 @@ Do not open a PR until every item above is checked off.
 
 This constitution supersedes all other practices. All implementation decisions must align with these principles. Complexity must be justified. Amendments require updating this file with a new version and date.
 
-**Version**: 1.2.0 | **Ratified**: 2026-03-24 | **Last Amended**: 2026-03-25
+**Version**: 1.3.0 | **Ratified**: 2026-03-24 | **Last Amended**: 2026-03-26
