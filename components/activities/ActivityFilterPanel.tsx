@@ -51,8 +51,8 @@ export default function ActivityFilterPanel({ activities, onFilterChange }: Prop
 
   return (
     <div>
-      {/* Filter controls — sticky below nav + tab bar (nav ~56px + tab bar ~41px) */}
-      <div className="sticky top-[97px] z-10 bg-gray-50 pb-2 -mx-6 px-6">
+      {/* Filter controls */}
+      <div className="pb-2">
       {/* Type filter buttons */}
       <div className="flex flex-wrap gap-2 mb-4">
         {uniqueTypes.map((type) => {
@@ -115,15 +115,15 @@ export default function ActivityFilterPanel({ activities, onFilterChange }: Prop
       <p className="text-sm text-gray-500 mb-3">
         {filtered.length} of {activities.length} activities
       </p>
-      </div>{/* end sticky filter controls */}
+      </div>{/* end filter controls */}
 
-      {/* Activity list */}
+      {/* Activity list — scrollable frame */}
       {filtered.length === 0 ? (
         <div className="p-8 text-center bg-white rounded-xl border border-gray-200">
           <p className="text-gray-500">No activities match your filters.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+        <div className="overflow-y-auto max-h-[60vh] bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
           {filtered.map((activity) => (
             <ActivityRow key={activity.id} activity={activity} />
           ))}
