@@ -27,8 +27,8 @@ export default function ActivityTabs({ activities }: Props) {
 
   return (
     <div>
-      {/* Tab bar */}
-      <div className="flex border-b border-gray-200 mb-4">
+      {/* Tab bar — sticky below the nav */}
+      <div className="flex border-b border-gray-200 mb-4 sticky top-14 z-10 bg-gray-50 -mx-6 px-6">
         <button
           className={activeTab === "activities" ? activeClass : inactiveClass}
           onClick={() => setActiveTab("activities")}

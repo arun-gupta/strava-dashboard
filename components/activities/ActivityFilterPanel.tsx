@@ -51,6 +51,8 @@ export default function ActivityFilterPanel({ activities, onFilterChange }: Prop
 
   return (
     <div>
+      {/* Filter controls — sticky below nav + tab bar (nav ~56px + tab bar ~41px) */}
+      <div className="sticky top-[97px] z-10 bg-gray-50 pb-2 -mx-6 px-6">
       {/* Type filter buttons */}
       <div className="flex flex-wrap gap-2 mb-4">
         {uniqueTypes.map((type) => {
@@ -113,6 +115,7 @@ export default function ActivityFilterPanel({ activities, onFilterChange }: Prop
       <p className="text-sm text-gray-500 mb-3">
         {filtered.length} of {activities.length} activities
       </p>
+      </div>{/* end sticky filter controls */}
 
       {/* Activity list */}
       {filtered.length === 0 ? (
